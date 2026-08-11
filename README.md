@@ -48,18 +48,6 @@ Run the Node.js container:
 docker run --name nodeapp --network app_default -p 3000:3000 node-mysql-app
 ```
 
-List running containers:
-
-```bash
-docker ps
-```
-
-List Docker images:
-
-```bash
-docker images
-```
-
 ## Docker Compose
 
 MySQL and phpMyAdmin are configured using Docker Compose.
@@ -80,22 +68,6 @@ const db = mysql.createConnection({
 
 Here, `mysqldb` is the MySQL service name defined in the Compose configuration.
 
-### Port Mapping
-
-MySQL can be exposed to the host machine using:
-
-```yaml
-ports:
-  - "3306:3306"
-```
-
-This allows access from the host through:
-
-```text
-localhost:3306
-```
-
-Container-to-container communication uses the Docker network and does not require host port publishing.
 
 ## Application Port
 
@@ -110,54 +82,3 @@ The container port is published using:
 ```bash
 -p 3000:3000
 ```
-
-## Project Structure
-
-```text
-.
-├── Dockerfile
-├── docker-compose.yml
-├── package.json
-├── package-lock.json
-├── server.js
-├── .dockerignore
-└── README.md
-```
-
-## Kubernetes / K3s
-
-Kubernetes deployment includes:
-
-* Node.js Deployment
-* Node.js Service
-* MySQL Deployment / StatefulSet
-* MySQL Service
-* ConfigMap
-* Secret
-* PersistentVolume
-* PersistentVolumeClaim
-* Health checks
-
-## Container Architecture
-
-```text
-Node.js Application
-        │
-        ▼
-      Docker
-        │
-        ▼
- Docker Compose
-        │
-        ├── Node.js
-        ├── MySQL
-        └── phpMyAdmin
-        │
-        ▼
-   Kubernetes / K3s
-```
-
-## License
-
-This project is intended for learning and development purposes.
-

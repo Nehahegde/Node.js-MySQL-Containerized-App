@@ -1,0 +1,22 @@
+# version: "3.8"
+services:
+  mysqldb:
+    image: mysql:latest
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: crudDB
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: passw
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    ports:
+      - "8080:80"      ##hostport:container_port
+    environment:
+      PMA_HOST: mysqldb
+      PMA_USER: admin
+      PMA_PASSWORD: passw
+    depends_on:
+      - mysqldb
